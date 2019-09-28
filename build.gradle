@@ -1,0 +1,48 @@
+buildscript {
+    dependencies {
+        classpath "org.elasticsearch.gradle:build-tools:7.3.2"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+
+configurations.all {
+    resolutionStrategy.force 'org.apache.httpcomponents:httpclient:4.5.10'
+    resolutionStrategy.force 'org.apache.httpcomponents:httpcore:4.4.12'
+}
+
+
+// apply plugin: 'elasticsearch.testclusters'
+apply plugin: 'elasticsearch.esplugin'
+
+esplugin {
+    description 'http discovery plugin'
+    name 'es-http-discovery-plugin '
+    classname 'com.es_plugins.HttpBasedDiscoveryPlugin'
+}
+
+group 'com.es-plugins'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 12
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'
+    compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.12'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+}
+
+
+licenseFile = rootProject.file('APACHE-LICENSE-2.0.txt')
+noticeFile = rootProject.file('NOTICE.txt')
+dependencyLicenses.enabled = false
+licenseHeaders.enabled = false
+thirdPartyAudit.enabled = false

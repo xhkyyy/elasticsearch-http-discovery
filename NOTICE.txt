@@ -1,0 +1,2 @@
+es-http-discovery-plugin
+Copyright 2009-2017 es-http-discovery-plugin
