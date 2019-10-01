@@ -44,8 +44,7 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.12'
     compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.10'
-
-
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version: '7.3.2'
 }
 
 
