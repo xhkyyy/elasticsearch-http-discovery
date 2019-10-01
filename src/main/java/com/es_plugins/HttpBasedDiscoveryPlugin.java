@@ -1,6 +1,7 @@
 package com.es_plugins;
 
 import org.elasticsearch.common.network.NetworkService;
+import org.elasticsearch.common.settings.Setting;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.discovery.SeedHostsProvider;
 import org.elasticsearch.plugins.DiscoveryPlugin;
@@ -8,8 +9,7 @@ import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.ReloadablePlugin;
 import org.elasticsearch.transport.TransportService;
 
-import java.util.Collections;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -27,6 +27,7 @@ public class HttpBasedDiscoveryPlugin extends Plugin implements DiscoveryPlugin,
 
     @Override
     public void reload(Settings settings) throws Exception {
+        // TODO
     }
 
    /* @Override
@@ -35,8 +36,25 @@ public class HttpBasedDiscoveryPlugin extends Plugin implements DiscoveryPlugin,
     }*/
 
     @Override
+    public List<Setting<?>> getSettings() {
+        List<Setting<?>> settings = new ArrayList<>(
+                Arrays.asList(HttpService.HOST_URL_SETTING)
+        );
+        return Collections.unmodifiableList(settings);
+    }
+
+    public HttpService createHttpService() {
+        return new HttpServiceImpl();
+    }
+
+    @Override
     public Map<String, Supplier<SeedHostsProvider>> getSeedHostProviders(TransportService transportService, NetworkService networkService) {
-        return Collections.singletonMap(httpBased, () -> new HttpBasedSeedHostsProvider(settings));
+        System.out.println("-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=-=getSeedHostProviders(1)-=-=-=-=-=-=");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=");
+        return Collections.singletonMap(httpBased, () -> new HttpBasedSeedHostsProvider(settings, createHttpService()));
     }
 
    /* @Override
