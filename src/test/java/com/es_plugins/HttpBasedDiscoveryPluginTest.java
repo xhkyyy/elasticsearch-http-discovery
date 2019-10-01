@@ -45,7 +45,6 @@ public class HttpBasedDiscoveryPluginTest extends ESIntegTestCase {
     }
 
     public void testJoin() {
-        // start master node
         final String masterNode = internalCluster().startMasterOnlyNode();
         registerNode(masterNode);
 
@@ -56,7 +55,6 @@ public class HttpBasedDiscoveryPluginTest extends ESIntegTestCase {
                 .get();
         assertNotNull(clusterStateResponse.getState().nodes().getMasterNodeId());
 
-        // start another node
         final String secondNode = internalCluster().startNode();
         registerNode(secondNode);
         clusterStateResponse = client(secondNode).admin().cluster().prepareState()
@@ -67,16 +65,13 @@ public class HttpBasedDiscoveryPluginTest extends ESIntegTestCase {
                 .get();
         assertNotNull(clusterStateResponse.getState().nodes().getMasterNodeId());
 
-        // wait for the cluster to form
         assertNoTimeout(client().admin().cluster().prepareHealth().setWaitForNodes(Integer.toString(2)).get());
         assertNumberOfNodes(2);
 
-        /*
-        // add one more node and wait for it to join
         final String thirdNode = internalCluster().startDataOnlyNode();
         registerNode(thirdNode);
         assertNoTimeout(client().admin().cluster().prepareHealth().setWaitForNodes(Integer.toString(3)).get());
-        assertNumberOfNodes(3);*/
+        assertNumberOfNodes(3);
     }
 
     private static void registerNode(final String nodeName) {
