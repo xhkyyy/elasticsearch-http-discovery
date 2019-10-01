@@ -1,0 +1,6 @@
+grant  {
+    permission org.elasticsearch.secure_sm.ThreadPermission "modifyArbitraryThread";
+    permission org.elasticsearch.secure_sm.ThreadPermission "modifyArbitraryThreadGroup";
+    permission java.net.URLPermission "http:*", "GET:";
+    permission java.net.URLPermission "https:*", "GET:";
+};

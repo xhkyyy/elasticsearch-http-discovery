@@ -42,7 +42,6 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
-    compile group: 'com.google.apis', name: 'google-api-services-compute', version: 'v1-rev214-1.25.0'
 }
 
 
