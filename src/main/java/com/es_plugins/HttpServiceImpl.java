@@ -1,12 +1,10 @@
 package com.es_plugins;
 
+import org.apache.http.client.fluent.Request;
 import org.elasticsearch.common.transport.TransportAddress;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -18,11 +16,18 @@ public class HttpServiceImpl implements HttpService {
 
     @Override
     public List<TransportAddress> getSeedAddresses(String url) {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
-        HttpClient client = HttpClient.newHttpClient();
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return Optional.ofNullable(response.body())
+
+            final var value = doPrivileged(() -> {
+                try {
+                    return Request.Get(url).execute().returnContent().asString();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return "";
+            });
+
+            return Optional.ofNullable(value)
                     .stream()
                     .flatMap(compile::splitAsStream)
                     .filter(Predicate.not(String::isBlank))

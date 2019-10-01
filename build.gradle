@@ -9,12 +9,12 @@ plugins {
 }
 
 
-/*
 configurations.all {
     resolutionStrategy.force 'org.apache.httpcomponents:httpclient:4.5.10'
     resolutionStrategy.force 'org.apache.httpcomponents:httpcore:4.4.12'
+    resolutionStrategy.force 'org.apache.httpcomponents:fluent-hc:4.5.10'
+    resolutionStrategy.force 'commons-logging:commons-logging:1.1.1'
 }
-*/
 
 
 // apply plugin: 'elasticsearch.testclusters'
@@ -23,7 +23,7 @@ apply plugin: 'elasticsearch.esplugin'
 
 esplugin {
     description 'http discovery plugin'
-    name 'es-http-discovery-plugin '
+    name 'es-http-discovery-plugin'
     classname 'com.es_plugins.HttpBasedDiscoveryPlugin'
 }
 
@@ -40,8 +40,12 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
-    compileOnly 'org.projectlombok:lombok:1.18.10'
-    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'
+    compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.12'
+    compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.10'
+
+
 }
 
 
