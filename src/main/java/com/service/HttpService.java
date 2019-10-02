@@ -21,7 +21,7 @@ public interface HttpService {
         return AccessController.doPrivileged(operation);
     }
 
-    Setting<String> HOST_URL_SETTING = new Setting<>("discovery.http.host_url", "",
+    Setting<String> HTTP_URL_SETTING = new Setting<>("discovery.http.url", "",
             Function.identity(), Setting.Property.NodeScope);
 
 }
