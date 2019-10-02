@@ -1,18 +1,38 @@
-# es-http-discovery-plugin
+# elasticsearch-http-discovery
 
+### How To Use
+
+installation:
 
 ```
-bin/elasticsearch-plugin --verbose install  http://172.20.10.2:8000/es-http-discovery-plugin-1.0-SNAPSHOT.zip
+bin/elasticsearch-plugin --verbose install  https://github.com/xhkyyy/elasticsearch-http-discovery/releases/download/v7.3.2/elasticsearch-http-discovery-v7.3.2.zip
+```
 
+elasticsearch.yml:
+
+```yml
 discovery.seed_providers: http
-discovery.http.url: http://172.20.10.2:18000
-cluster.initial_master_nodes: ["node-11"]
+
+# http://http_server:port
+discovery.http.url:
+
+# the initial set of master-eligible nodes
+cluster.initial_master_nodes:
+```
+
+### Test
+
+simple http server:
+
+```sh
+python test/http_server_demo.py
 ```
 
 
+### Build
 
-#### TODO
-
-+ httpclient timeout
-
-+ https
+```
+git clone git@github.com:xhkyyy/elasticsearch-http-discovery.git
+$ cd elasticsearch-http-discovery/
+$ ./gradlew build
+```
