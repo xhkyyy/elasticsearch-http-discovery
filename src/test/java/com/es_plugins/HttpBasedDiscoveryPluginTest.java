@@ -1,5 +1,6 @@
 package com.es_plugins;
 
+import com.service.HttpService;
 import org.elasticsearch.action.admin.cluster.state.ClusterStateResponse;
 import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.common.settings.Settings;
@@ -35,7 +36,7 @@ public class HttpBasedDiscoveryPluginTest extends ESIntegTestCase {
         return Settings.builder()
                 .put(super.nodeSettings(nodeOrdinal))
                 .put(DISCOVERY_SEED_PROVIDERS_SETTING.getKey(), "http")
-                .put(HttpService.HOST_URL_SETTING.getKey(), "http://127.0.0.1:18000")
+                .put(HttpService.HTTP_URL_SETTING.getKey(), "http://127.0.0.1:18000")
                 .build();
     }
 

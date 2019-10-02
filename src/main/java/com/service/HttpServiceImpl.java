@@ -1,4 +1,4 @@
-package com.es_plugins;
+package com.service;
 
 import org.apache.http.client.fluent.Request;
 import org.elasticsearch.common.transport.TransportAddress;

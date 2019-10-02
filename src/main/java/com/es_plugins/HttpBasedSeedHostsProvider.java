@@ -1,5 +1,6 @@
 package com.es_plugins;
 
+import com.service.HttpService;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.discovery.SeedHostsProvider;
@@ -17,7 +18,7 @@ public class HttpBasedSeedHostsProvider implements SeedHostsProvider {
 
 
     HttpBasedSeedHostsProvider(Settings settings, HttpService httpService) {
-        url = HttpService.HOST_URL_SETTING.get(settings);
+        url = HttpService.HTTP_URL_SETTING.get(settings);
         this.httpService = httpService;
     }
 

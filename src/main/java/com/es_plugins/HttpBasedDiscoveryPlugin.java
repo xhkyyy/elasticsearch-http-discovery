@@ -1,5 +1,7 @@
 package com.es_plugins;
 
+import com.service.HttpService;
+import com.service.HttpServiceImpl;
 import org.elasticsearch.common.network.NetworkService;
 import org.elasticsearch.common.settings.Setting;
 import org.elasticsearch.common.settings.Settings;
@@ -9,7 +11,6 @@ import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.ReloadablePlugin;
 import org.elasticsearch.transport.TransportService;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,7 @@ public class HttpBasedDiscoveryPlugin extends Plugin implements DiscoveryPlugin,
 
     private Settings settings;
 
-    private final String httpBased = "http";
+    private final String HTTP_KEY = "http";
 
     public HttpBasedDiscoveryPlugin(Settings settings) {
         this.settings = settings;
@@ -34,40 +35,17 @@ public class HttpBasedDiscoveryPlugin extends Plugin implements DiscoveryPlugin,
         // TODO
     }
 
-   /* @Override
-    public NetworkService.CustomNameResolver getCustomNameResolver(Settings settings) {
-        return null;
-    }*/
-
     @Override
     public List<Setting<?>> getSettings() {
-        List<Setting<?>> settings = new ArrayList<>(
-                Arrays.asList(HttpService.HOST_URL_SETTING)
-        );
-        return Collections.unmodifiableList(settings);
+        return Collections.unmodifiableList(Arrays.asList(HttpService.HTTP_URL_SETTING));
     }
 
-    public HttpService createHttpService() {
+    HttpService createHttpService() {
         return new HttpServiceImpl();
     }
 
     @Override
     public Map<String, Supplier<SeedHostsProvider>> getSeedHostProviders(TransportService transportService, NetworkService networkService) {
-        System.out.println("-=-=-=-=-=-=-=-=-=-=");
-        System.out.println("-=-=-=-=-=-=-=-=-=-=");
-        System.out.println("-=-=-=-=getSeedHostProviders(1)-=-=-=-=-=-=");
-        System.out.println("-=-=-=-=-=-=-=-=-=-=");
-        System.out.println("-=-=-=-=-=-=-=-=-=-=");
-        return Collections.singletonMap(httpBased, () -> new HttpBasedSeedHostsProvider(settings, createHttpService()));
+        return Collections.singletonMap(HTTP_KEY, () -> new HttpBasedSeedHostsProvider(settings, createHttpService()));
     }
-
-   /* @Override
-    public BiConsumer<DiscoveryNode, ClusterState> getJoinValidator() {
-        return null;
-    }
-
-    @Override
-    public Map<String, ElectionStrategy> getElectionStrategies() {
-        return null;
-    }*/
 }

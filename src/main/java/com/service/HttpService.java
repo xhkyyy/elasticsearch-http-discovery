@@ -1,4 +1,4 @@
-package com.es_plugins;
+package com.service;
 
 import org.elasticsearch.SpecialPermission;
 import org.elasticsearch.common.settings.Setting;
