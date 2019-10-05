@@ -4,7 +4,6 @@ import com.service.HttpService;
 import org.elasticsearch.action.admin.cluster.state.ClusterStateResponse;
 import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.transport.TransportService;
@@ -17,11 +16,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Collections.singletonList;
-import static org.elasticsearch.discovery.DiscoveryModule.DISCOVERY_SEED_PROVIDERS_SETTING;
 import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertNoTimeout;
 
 @ESIntegTestCase.ClusterScope(supportsDedicatedMasters = false, numDataNodes = 0, numClientNodes = 0)
-public class HttpBasedDiscoveryPluginTest extends ESIntegTestCase {
+public class HttpBasedDiscoveryPluginTests extends ESIntegTestCase {
 
     private static final Map<String, DiscoveryNode> nodes = new ConcurrentHashMap<>();
 
@@ -35,7 +33,7 @@ public class HttpBasedDiscoveryPluginTest extends ESIntegTestCase {
     protected Settings nodeSettings(int nodeOrdinal) {
         return Settings.builder()
                 .put(super.nodeSettings(nodeOrdinal))
-                .put(DISCOVERY_SEED_PROVIDERS_SETTING.getKey(), "http")
+                .put("discovery.zen.hosts_provider", "http")
                 .put(HttpService.HTTP_URL_SETTING.getKey(), "http://127.0.0.1:18000")
                 .build();
     }
@@ -94,9 +92,9 @@ public class HttpBasedDiscoveryPluginTest extends ESIntegTestCase {
         @Override
         public HttpService createHttpService() {
             return url -> {
-                List<TransportAddress> list = new ArrayList<>();
+                List<DiscoveryNode> list = new ArrayList<>();
                 nodes.forEach((k, v) -> {
-                    list.add(v.getAddress());
+                    list.add(v);
                 });
                 return list;
             };

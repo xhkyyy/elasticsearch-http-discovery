@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath "org.elasticsearch.gradle:build-tools:7.3.2"
+        classpath "org.elasticsearch.gradle:build-tools:6.2.2"
     }
 }
 
@@ -17,11 +17,11 @@ configurations.all {
 }
 
 
-// apply plugin: 'elasticsearch.testclusters'
 apply plugin: 'elasticsearch.esplugin'
-
+apply plugin: 'idea'
 
 esplugin {
+
     description 'http discovery plugin'
     name 'es-http-discovery-plugin'
     classname 'com.es_plugins.HttpBasedDiscoveryPlugin'
@@ -30,8 +30,8 @@ esplugin {
 group 'com.es-plugins'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 12
-targetCompatibility = 12
+sourceCompatibility = 9
+targetCompatibility = 9
 
 repositories {
     mavenCentral()
@@ -44,15 +44,8 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.12'
     compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.10'
-    compile group: 'org.elasticsearch', name: 'elasticsearch', version: '7.3.2'
-}
-
-
-test {
-
-    systemProperty 'tests.artifact', project.name
-
-    systemProperty 'java.security.policy', "/Users/len/Code/Idea/es-http-discovery-plugin/src/main/plugin-metadata/plugin-security.policy"
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version: '6.2.2'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 }
 
 
@@ -64,4 +57,8 @@ thirdPartyAudit.enabled = false
 forbiddenApisTest.enabled = false
 forbiddenApisMain.enabled = false
 loggerUsageCheck.enabled = false
-testingConventions.enabled = false
+// testingConventions.enabled = false
+//unitTest.enabled = false
+integTest.enabled = false
+test.enabled = false
+

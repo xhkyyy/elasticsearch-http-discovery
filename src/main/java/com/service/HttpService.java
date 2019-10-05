@@ -1,8 +1,8 @@
 package com.service;
 
 import org.elasticsearch.SpecialPermission;
+import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.common.settings.Setting;
-import org.elasticsearch.common.transport.TransportAddress;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -14,7 +14,7 @@ import java.util.function.Function;
  */
 public interface HttpService {
 
-    List<TransportAddress> getSeedAddresses(String url);
+    List<DiscoveryNode> getSeedAddresses(String url);
 
     default <T> T doPrivileged(final PrivilegedAction<T> operation) {
         SpecialPermission.check();

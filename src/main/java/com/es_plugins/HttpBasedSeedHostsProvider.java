@@ -1,16 +1,17 @@
 package com.es_plugins;
 
 import com.service.HttpService;
+import org.elasticsearch.cluster.node.DiscoveryNode;
+import org.elasticsearch.common.component.AbstractComponent;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.discovery.SeedHostsProvider;
+import org.elasticsearch.discovery.zen.UnicastHostsProvider;
 
 import java.util.List;
 
 /**
  * @author xhkyyy
  */
-public class HttpBasedSeedHostsProvider implements SeedHostsProvider {
+public class HttpBasedSeedHostsProvider extends AbstractComponent implements UnicastHostsProvider {
 
     private String url;
 
@@ -18,12 +19,14 @@ public class HttpBasedSeedHostsProvider implements SeedHostsProvider {
 
 
     HttpBasedSeedHostsProvider(Settings settings, HttpService httpService) {
+        super(settings);
         url = HttpService.HTTP_URL_SETTING.get(settings);
         this.httpService = httpService;
     }
 
+
     @Override
-    public List<TransportAddress> getSeedAddresses(HostsResolver hostsResolver) {
+    public List<DiscoveryNode> buildDynamicNodes() {
         return httpService.getSeedAddresses(url);
     }
 }
