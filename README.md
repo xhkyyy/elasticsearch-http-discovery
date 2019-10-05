@@ -5,7 +5,7 @@
 installation:
 
 ```
-bin/elasticsearch-plugin --verbose install  https://github.com/xhkyyy/elasticsearch-http-discovery/releases/download/v7.3.2/elasticsearch-http-discovery-v7.3.2.zip
+bin/elasticsearch-plugin --verbose install  https://github.com/xhkyyy/elasticsearch-http-discovery/releases/download/v6.2.2/elasticsearch-http-discovery-v6.2.2.zip
 ```
 
 elasticsearch.yml:
