@@ -30,8 +30,8 @@ esplugin {
 group 'com.es-plugins'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 9
-targetCompatibility = 9
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
