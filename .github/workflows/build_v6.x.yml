@@ -1,4 +1,4 @@
-name: Build_v6.x
+name: build_v6.x
 
 on:
   push:
