@@ -11,7 +11,7 @@ bin/elasticsearch-plugin --verbose install  https://github.com/xhkyyy/elasticsea
 elasticsearch.yml:
 
 ```yml
-discovery.seed_providers: http
+discovery.zen.hosts_provider: http
 
 # http://http_server:port
 discovery.http.url:
