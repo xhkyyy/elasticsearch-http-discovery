@@ -15,9 +15,6 @@ discovery.zen.hosts_provider: http
 
 # http://http_server:port
 discovery.http.url:
-
-# the initial set of master-eligible nodes
-cluster.initial_master_nodes:
 ```
 
 ### Test
