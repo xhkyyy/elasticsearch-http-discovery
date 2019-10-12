@@ -1,16 +1,29 @@
-# elasticsearch-http-discovery
+elasticsearch-http-discovery
+=============================
 
-### How To Use
+The elasticsearch-http-discovery plugin uses the HTTP API to identify the addresses of seed hosts.
+
+Versions
+--------
+
+Plugin branch | ES version | Release
+-----------|-----------|-----------
+master | 7.3.x | [elasticsearch-http-discovery-v7.3.2](https://github.com/xhkyyy/elasticsearch-http-discovery/releases/tag/v7.3.2)
+6.2.x| 6.2.x | [elasticsearch-http-discovery-v6.2.2](https://github.com/xhkyyy/elasticsearch-http-discovery/releases/tag/v6.2.2)
+
+
+How To Use
+--------
 
 installation:
 
-```
-bin/elasticsearch-plugin --verbose install  https://github.com/xhkyyy/elasticsearch-http-discovery/releases/download/v7.3.2/elasticsearch-http-discovery-v7.3.2.zip
+```sh
+bin/elasticsearch-plugin --verbose install [url]
 ```
 
 elasticsearch.yml:
 
-```yml
+```yaml
 discovery.seed_providers: http
 
 # http://http_server:port
@@ -20,7 +33,8 @@ discovery.http.url:
 cluster.initial_master_nodes:
 ```
 
-### Test
+Test
+--------
 
 simple http server:
 
@@ -28,11 +42,11 @@ simple http server:
 python test/http_server_demo.py
 ```
 
-
-### Build
+Build
+--------
 
 ```
-git clone git@github.com:xhkyyy/elasticsearch-http-discovery.git
-$ cd elasticsearch-http-discovery/
-$ ./gradlew build
+./gradlew build
 ```
+
+
