@@ -22,7 +22,7 @@ apply plugin: 'elasticsearch.esplugin'
 
 
 esplugin {
-    description 'http discovery plugin'
+    description 'The elasticsearch-http-discovery plugin uses the HTTP API to identify the addresses of seed hosts.'
     name 'es-http-discovery-plugin'
     classname 'com.es_plugins.HttpBasedDiscoveryPlugin'
 }
