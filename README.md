@@ -15,23 +15,17 @@ master | 7.3.x | [elasticsearch-http-discovery-v7.3.2](https://github.com/xhkyyy
 How To Use
 --------
 
-installation:
+***installation:***
 
 ```sh
 bin/elasticsearch-plugin --verbose install [url]
 ```
 
-elasticsearch.yml:
+***elasticsearch.yml:***
 
-```yaml
-discovery.seed_providers: http
++ [elasticsearch-6.2.x.yml](test/elasticsearch-6.2.x.yml)
 
-# http://http_server:port
-discovery.http.url:
-
-# the initial set of master-eligible nodes
-cluster.initial_master_nodes:
-```
++ [elasticsearch-7.3.x.yml](test/elasticsearch-7.3.x.yml)
 
 Test
 --------
